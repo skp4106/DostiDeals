@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Back - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            padding: 20px;
+        }
+
+        .login-container {
+            display: flex;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            min-height: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .illustration {
+            flex: 1;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .geometric-art {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
+        }
+
+        .shape {
+            position: absolute;
+        }
+
+        .rectangle-purple {
+            width: 25%;
+            height: 60%;
+            background: #6C63FF;
+            left: 20%;
+            top: 15%;
+            border-radius: 4px;
+        }
+
+        .rectangle-black {
+            width: 20%;
+            height: 45%;
+            background: #2D2D2D;
+            left: 50%;
+            top: 25%;
+            border-radius: 4px;
+        }
+
+        .semicircle {
+            width: 40%;
+            height: 20%;
+            background: #FF7043;
+            border-radius: 120px 120px 0 0;
+            left: 15%;
+            top: 60%;
+        }
+
+        .rectangle-yellow {
+            width: 20%;
+            height: 42%;
+            background: #FDD835;
+            left: 65%;
+            top: 30%;
+            border-radius: 4px;
+        }
+
+        .login-form {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 300px;
+        }
+
+        h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: clamp(20px, 5vw, 40px);
+            font-size: clamp(14px, 3vw, 16px);
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            outline: none;
+            transition: border-color 0.3s;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+
+        input:focus {
+            border-color: #6C63FF;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: clamp(12px, 2.5vw, 14px);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .forgot-password {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .btn {
+            padding: clamp(10px, 3vw, 14px);
+            border-radius: 6px;
+            border: none;
+            font-size: clamp(14px, 3vw, 16px);
+            cursor: pointer;
+            margin-bottom: 16px;
+            width: 100%;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: #2D2D2D;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #404040;
+        }
+
+        .btn-google {
+            background: #f5f5f5;
+            color: #2D2D2D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .btn-google:hover {
+            background: #e8e8e8;
+        }
+
+        .sign-up {
+            text-align: center;
+            font-size: clamp(12px, 2.5vw, 14px);
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .sign-up a {
+            color: #2D2D2D;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+
+            .illustration {
+                padding: 40px 20px;
+            }
+
+            .geometric-art {
+                max-width: 200px;
+            }
+
+            .login-form {
+                padding: 30px 20px;
+            }
+
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .login-container {
+                border-radius: 16px;
+            }
+
+            .geometric-art {
+                max-width: 150px;
+            }
+
+            .login-form {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (hover: none) {
+            .btn:hover {
+                background: initial;
+            }
+            
+            .btn-primary:hover {
+                background: #2D2D2D;
+            }
+            
+            .btn-google:hover {
+                background: #f5f5f5;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="illustration">
+            <div class="geometric-art">
+                <div class="shape rectangle-purple"></div>
+                <div class="shape rectangle-black"></div>
+                <div class="shape semicircle"></div>
+                <div class="shape rectangle-yellow"></div>
+            </div>
+        </div>
+        <div class="login-form">
+            <h1>Welcome back!</h1>
+            <p>Please enter your details</p>
+            <div class="input-group">
+                <input type="email" placeholder="Email" aria-label="Email">
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" aria-label="Password">
+            </div>
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" aria-label="Remember me for 30 days">
+                    Remember for 30 days
+                </label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <button class="btn btn-primary">Log in</button>
+            <button class="btn btn-google">Continue with Google</button>
+            <p class="sign-up">
+                Don't have an account? <a href="signuppage.html">Sign up</a>
+            </p>
+        </div>
+    </div>
+    <script>
+        // Select the login button
+        const loginButton = document.querySelector('.btn-primary');
+        
+        // Add click event listener to the login button
+        loginButton.addEventListener('click', function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+            
+            // Get email and password inputs
+            const emailInput = document.querySelector('input[type="email"]');
+            const passwordInput = document.querySelector('input[type="password"]');
+            
+            // Basic validation
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            
+            // Simple validation checks
+            if (!email) {
+                alert('Please enter your email');
+                return;
+            }
+            
+            if (!password) {
+                alert('Please enter your password');
+                return;
+            }
+            
+            // Basic email format check
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Minimum password length
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long');
+                return;
+            }
+            
+            // If validation passes, redirect to landing page
+            window.location.href = 'landing.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Dosti Deals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #ea580c;
+            --secondary: #fed7aa;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #eab308;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.1) 0%, rgba(254, 215, 170, 0.05) 100%);
+            z-index: -1;
+        }
+
+        /* Animated gradient background */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(234, 88, 12, 0.1) 0%, transparent 60%);
+            z-index: -1;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        /* Enhanced logo animation */
+        .logo-animation {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-animation::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 6px;
+            background: var(--accent);
+            bottom: 5px;
+            left: 0;
+            border-radius: 3px;
+            animation: logoUnderline 1.5s forwards 1s;
+        }
+
+        @keyframes logoUnderline {
+            to { width: 100%; }
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+        }
+
+        /* Floating icons around the hero section */
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Enhanced scroll-down button */
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .scroll-down:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+
+        /* Enhanced sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* 3D perspective on about section */
+        .about-section {
+            background-color: white;
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            padding: 8rem 2rem;
+            margin-top: -5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ea580c' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* Enhanced section titles */
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Enhanced section title animation */
+        .section-title.animate {
+            animation: titleReveal 1s forwards;
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced highlight box */
+        .highlight-box {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--secondary);
+            background: rgba(254, 215, 170, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .highlight-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        /* Ripple effect on highlight box */
+        .highlight-box::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(234, 88, 12, 0.1);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+
+        .highlight-box:hover::after {
+            width: 300%;
+            height: 300%;
+        }
+
+        /* Enhanced feature cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.5s, box-shadow 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+            border: 1px solid rgba(234, 88, 12, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Card glow effect on hover */
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(234, 88, 12, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.8s;
+            z-index: -1;
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Enhanced feature icons */
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: all 0.5s;
+            display: inline-block;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .feature-title {
+            color: var(--primary);
+        }
+
+        /* Enhanced CTA section */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #f97316);
+            color: white;
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+            margin-top: -3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated dots background */
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+            animation: moveDots 60s linear infinite;
+        }
+
+        @keyframes moveDots {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 40px 40px;
+            }
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-description {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced buttons */
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-button {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .login-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button shine effect */
+        .auth-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 70%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+
+        .auth-button:hover::after {
+            left: 100%;
+        }
+
+        .signup-btn {
+            background: white;
+            color: var(--primary);
+            border: 2px solid white;
+        }
+
+        .signup-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced CTA button */
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.5s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 70%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Enhanced animations */
+        .animate {
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation with 3D rotation */
+        .animate-3d {
+            animation: rotate3d 1s forwards;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        @keyframes rotate3d {
+            from {
+                opacity: 0;
+                transform: rotateX(30deg) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: rotateX(0) translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .logo-animation {
+                font-size: 3rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title, .cta-title {
+                font-size: 2rem;
+            }
+
+            .about-section, .cta-section {
+                clip-path: none;
+                padding: 5rem 2rem;
+            }
+
+            .highlight-box {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-animation {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .auth-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="floating-icons">
+            <div class="floating-icon" style="font-size: 40px; left: 10%; animation-duration: 20s; animation-delay: 1s;">🛍️</div>
+            <div class="floating-icon" style="font-size: 30px; left: 25%; animation-duration: 15s; animation-delay: 4s;">💰</div>
+            <div class="floating-icon" style="font-size: 25px; left: 45%; animation-duration: 18s; animation-delay: 2s;">🌱</div>
+            <div class="floating-icon" style="font-size: 35px; left: 70%; animation-duration: 12s; animation-delay: 0s;">👕</div>
+            <div class="floating-icon" style="font-size: 28px; left: 85%; animation-duration: 25s; animation-delay: 6s;">📚</div>
+            <div class="floating-icon" style="font-size: 32px; left: 15%; animation-duration: 22s; animation-delay: 8s;">🎮</div>
+            <div class="floating-icon" style="font-size: 30px; left: 65%; animation-duration: 19s; animation-delay: 5s;">🎁</div>
+            <div class="floating-icon" style="font-size: 36px; left: 35%; animation-duration: 16s; animation-delay: 3s;">🏡</div>
+        </div>
+        <h1 class="logo-animation animate__animated animate__fadeInDown">Dosti Deals</h1>
+        <p class="tagline animate">Where friends help friends find great deals on pre-loved items</p>
+        <div class="scroll-down animate__animated animate__fadeIn animate__delay-2s animate__infinite">
+            ↓ Scroll down ↓
+        </div>
+    </section>
+
+    <section class="about-section">
+        <h2 class="section-title animate">What We Do</h2>
+        <div class="highlight-box animate delay-1">
+            <p>
+                Dosti Deals is a friendly marketplace where you can buy and sell second-hand items within your community.
+                We make it easy to find great deals from people you can trust, helping you save money and reduce waste.
+                Our platform connects you with verified users to ensure safe and reliable transactions.
+            </p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">🛍️</div>
+                <h3 class="feature-title">Friendly Marketplace</h3>
+                <p>Buy and sell within your community of trusted friends and neighbors. No strangers, just friendly faces.</p>
+            </div>
+            
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Great Savings</h3>
+                <p>Find amazing deals on quality used items. Save money while giving pre-loved items a new home.</p>
+            </div>
+            
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">🌱</div>
+                <h3 class="feature-title">Sustainable Shopping</h3>
+                <p>Reduce waste by buying and selling second-hand. Good for your wallet and good for the planet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title animate">Ready to Explore?</h2>
+        <p class="cta-description animate delay-1">
+            Join our community of savvy shoppers and sellers today. Find your next great deal or give your unused items a new home.
+        </p>
+        
+        <div class="auth-buttons animate delay-1">
+            <a href="loginpage.html" class="auth-button login-btn">Log In</a>
+            <a href="signuppage.html" class="auth-button signup-btn">Sign Up</a>
+        </div>
+        
+        <a href="index.html" class="cta-button animate delay-2">Explore Our Platform</a>
+    </section>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial animations
+            const tagline = document.querySelector('.tagline');
+            setTimeout(() => {
+                tagline.classList.add('animate');
+            }, 500);
+
+            // Animate features on scroll with improved observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add a small random delay for staggered animation
+                        setTimeout(() => {
+                            entry.target.classList.add('animate');
+                        }, Math.random() * 300);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.feature-card, .section-title, .highlight-box, .cta-title, .cta-description, .auth-buttons').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scroll for scroll down button
+            document.querySelector('.scroll-down').addEventListener('click', () => {
+                document.querySelector('.about-section').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+            
+            // Parallax effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                
+                // Parallax for hero section
+                document.querySelector('.hero').style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+                
+                // Floating icons parallax
+                document.querySelectorAll('.floating-icon').forEach((icon, index) => {
+                    const speed = 0.1 + (index * 0.05);
+                    icon.style.transform = `translateY(${scrollPosition * speed}px)`;
+                });
+            });
+            
+            // Add text typing animation to the tagline
+            const typingAnimation = () => {
+                const taglineText = "Where friends help friends find great deals on pre-loved items";
+                const taglineElement = document.querySelector('.tagline');
+                taglineElement.textContent = "";
+                let i = 0;
+                
+                const typeInterval = setInterval(() => {
+                    if (i < taglineText.length) {
+                        taglineElement.textContent += taglineText.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typeInterval);
+                    }
+                }, 50);
+            };
+            
+            // Call typing animation after a delay
+            setTimeout(typingAnimation, 1000);
+            
+            // Mousemove effect for feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; 
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

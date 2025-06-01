@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosti Deals - Your Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .header-bg {
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .quantity-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <!-- Top Navigation -->
+    <div class="bg-white border-b py-3 px-4">
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <img src="images project/logo.png" alt="" class="w-12 h-12 mr-4">
+            <div class="text-2xl font-bold">Dosti Deals</div>
+            <div class="flex items-center space-x-4">
+                <input type="text" placeholder="Search" class="border px-3 py-1 w-64 rounded">
+                <button class="bg-red-500 text-white px-4 py-1 rounded">Search</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cart Content -->
+    <div class="max-w-4xl mx-auto mt-8 px-4">
+        <h1 class="text-2xl font-bold text-center mb-6">Your Cart</h1>
+        
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="border-b">
+                    <th class="text-left py-2">Item</th>
+                    <th class="text-right py-2">Price</th>
+                    <th class="text-center py-2">Quantity</th>
+                    <th class="text-right py-2">Total</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <tr class="border-b" data-id="backpack1" data-price="300">
+                    <td class="py-4">
+                        <div class="flex items-center">
+                            <img src="images project/7fe493d73f26873665190ee93c00cfdf.jpg" alt="" class="w-12 h-12 mr-4">
+                            <div>
+                                <div>Craftwood School Backpack for Teen Girls, Boys Waterproof High School Backpack for Student Bookbag College Backpack for Women Men Casual Daypack Travel Aesthetic Backpacks Black</div>
+                                <div class="text-xs text-orange-600">Estimated Ship Date: 5th April</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-right">₹300</td>
+                    <td class="text-center">
+                        <div class="flex justify-center items-center">
+                            <button class="quantity-btn decrease-btn">-</button>
+                            <input type="text" value="1" class="w-8 text-center mx-2 border quantity-input" readonly>
+                            <button class="quantity-btn increase-btn">+</button>
+                        </div>
+                    </td>
+                    <td class="text-right item-total">₹300</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="text-right mt-4 space-y-2">
+            <div>Subtotal: <span class="ml-8" id="subtotal">₹300</span></div>
+            <div>Sales Tax: <span class="ml-8" id="tax">₹40</span></div>
+            <div class="font-bold text-lg">Grand Total: <span class="ml-8" id="grand-total">₹340</span></div>
+            <div class="text-green-600 text-sm" id="shipping-message">Congrats, you're eligible for Free Shipping</div>
+        </div>
+        
+        <a href="shipping.html" class="block">
+            <button class="w-full bg-orange-500 text-white py-3 mt-4 hover:bg-orange-600">Check out</button>
+        </a>
+
+      
+            </div>
+        
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all the elements we need
+            const cartItems = document.getElementById('cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const taxElement = document.getElementById('tax');
+            const grandTotalElement = document.getElementById('grand-total');
+            const shippingMessageElement = document.getElementById('shipping-message');
+            
+            // Tax rate (currently 13.33% based on example)
+            const taxRate = 0.1333;
+            
+            // Function to update quantities and totals
+            function updateCart() {
+                let subtotal = 0;
+                
+                // Loop through all items in cart
+                const itemRows = cartItems.querySelectorAll('tr');
+                itemRows.forEach(row => {
+                    const price = parseInt(row.getAttribute('data-price'));
+                    const quantityInput = row.querySelector('.quantity-input');
+                    const quantity = parseInt(quantityInput.value);
+                    const itemTotal = price * quantity;
+                    
+                    // Update the item total
+                    const itemTotalElement = row.querySelector('.item-total');
+                    itemTotalElement.textContent = `₹${itemTotal}`;
+                    
+                    // Add to subtotal
+                    subtotal += itemTotal;
+                });
+                
+                // Calculate tax and grand total
+                const tax = Math.round(subtotal * taxRate);
+                const grandTotal = subtotal + tax;
+                
+                // Update the totals in the page
+                subtotalElement.textContent = `₹${subtotal}`;
+                taxElement.textContent = `₹${tax}`;
+                grandTotalElement.textContent = `₹${grandTotal}`;
+                
+                // Update shipping message
+                if (subtotal >= 200) {
+                    shippingMessageElement.textContent = "Congrats, you're eligible for Free Shipping";
+                    shippingMessageElement.classList.remove('text-red-600');
+                    shippingMessageElement.classList.add('text-green-600');
+                } else {
+                    shippingMessageElement.textContent = `Add ₹${200 - subtotal} more to get Free Shipping`;
+                    shippingMessageElement.classList.remove('text-green-600');
+                    shippingMessageElement.classList.add('text-red-600');
+                }
+            }
+            
+            // Add event listeners for quantity buttons
+            cartItems.addEventListener('click', function(event) {
+                if (event.target.classList.contains('increase-btn')) {
+                    const input = event.target.previousElementSibling;
+                    input.value = parseInt(input.value) + 1;
+                    updateCart();
+                } else if (event.target.classList.contains('decrease-btn')) {
+                    const input = event.target.nextElementSibling;
+                    if (parseInt(input.value) > 1) {
+                        input.value = parseInt(input.value) - 1;
+                        updateCart();
+                    }
+                }
+            });
+            
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = button.parentElement;
+                    const productId = product.getAttribute('data-id');
+                    const productPrice = parseInt(product.getAttribute('data-price'));
+                    const productName = product.querySelector('.font-bold').textContent;
+                    
+                    // Check if product already exists in cart
+                    const existingRow = document.querySelector(`tr[data-id="${productId}"]`);
+                    if (existingRow) {
+                        // Increase quantity if already in cart
+                        const quantityInput = existingRow.querySelector('.quantity-input');
+                        quantityInput.value = parseInt(quantityInput.value) + 1;
+                    } else {
+                        // Add new row if not in cart
+                        const newRow = document.createElement('tr');
+                        newRow.className = 'border-b';
+                        newRow.setAttribute('data-id', productId);
+                        newRow.setAttribute('data-price', productPrice);
+                        
+                        newRow.innerHTML = `
+                            <td class="py-4">
+                                <div class="flex items-center">
+                                    <img src="${product.querySelector('img').src}" alt="" class="w-12 h-12 mr-4">
+                                    <div>
+                                        <div>${productName}</div>
+                                        <div class="text-xs text-orange-600">Estimated Ship Date: 5th April</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">₹${productPrice}</td>
+                            <td class="text-center">
+                                <div class="flex justify-center items-center">
+                                    <button class="quantity-btn decrease-btn">-</button>
+                                    <input type="text" value="1" class="w-8 text-center mx-2 border quantity-input" readonly>
+                                    <button class="quantity-btn increase-btn">+</button>
+                                </div>
+                            </td>
+                            <td class="text-right item-total">₹${productPrice}</td>
+                        `;
+                        
+                        cartItems.appendChild(newRow);
+                    }
+                    
+                    // Show notification
+                    alert(`${productName} added to cart!`);
+                    
+                    // Update cart totals
+                    updateCart();
+                });
+            });
+            
+            // Initialize the cart
+            updateCart();
+            
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Create Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            padding: 20px;
+        }
+    
+        .signup-container {
+            display: flex;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            min-height: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    
+        .illustration {
+            flex: 1;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+    
+        .geometric-art {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
+        }
+    
+        .shape {
+            position: absolute;
+        }
+    
+        .rectangle-purple {
+            width: 25%;
+            height: 60%;
+            background: #6C63FF;
+            left: 20%;
+            top: 15%;
+            border-radius: 4px;
+        }
+    
+        .rectangle-black {
+            width: 20%;
+            height: 45%;
+            background: #2D2D2D;
+            left: 50%;
+            top: 25%;
+            border-radius: 4px;
+        }
+    
+        .semicircle {
+            width: 40%;
+            height: 20%;
+            background: #FF7043;
+            border-radius: 120px 120px 0 0;
+            left: 15%;
+            top: 60%;
+        }
+    
+        .rectangle-yellow {
+            width: 20%;
+            height: 42%;
+            background: #FDD835;
+            left: 65%;
+            top: 30%;
+            border-radius: 4px;
+        }
+    
+        .signup-form {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 320px;
+        }
+    
+        h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+        }
+    
+        .subtitle {
+            color: #666;
+            margin-bottom: clamp(20px, 5vw, 30px);
+            font-size: clamp(14px, 3vw, 16px);
+        }
+    
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+    
+        .input-group {
+            position: relative;
+        }
+    
+        .input-group.full-width {
+            grid-column: 1 / -1;
+        }
+    
+        .input-label {
+            display: block;
+            margin-bottom: 6px;
+            color: #444;
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+    
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+    
+        input:focus {
+            border-color: #6C63FF;
+        }
+    
+        .btn {
+            padding: clamp(10px, 3vw, 14px);
+            border-radius: 6px;
+            border: none;
+            font-size: clamp(14px, 3vw, 16px);
+            cursor: pointer;
+            margin-bottom: 16px;
+            width: 100%;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+    
+        .btn:active {
+            transform: scale(0.98);
+        }
+    
+        .btn-primary {
+            background: #2D2D2D;
+            color: white;
+        }
+    
+        .btn-primary:hover {
+            background: #404040;
+        }
+    
+        .login-link {
+            text-align: center;
+            font-size: clamp(12px, 2.5vw, 14px);
+            color: #666;
+            margin-top: 10px;
+        }
+    
+        .login-link a {
+            color: #2D2D2D;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column;
+            }
+    
+            .illustration {
+                padding: 40px 20px;
+            }
+    
+            .geometric-art {
+                max-width: 200px;
+            }
+    
+            .signup-form {
+                padding: 30px 20px;
+            }
+    
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+    
+            .signup-container {
+                border-radius: 16px;
+            }
+    
+            .geometric-art {
+                max-width: 150px;
+            }
+    
+            .signup-form {
+                padding: 20px 15px;
+            }
+        }
+    
+        @media (hover: none) {
+            .btn:hover {
+                background: initial;
+            }
+            
+            .btn-primary:hover {
+                background: #2D2D2D;
+            }
+        }
+    
+        @media (prefers-reduced-motion: reduce) {
+            .btn {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="illustration">
+            <div class="geometric-art">
+                <div class="shape rectangle-purple"></div>
+                <div class="shape rectangle-black"></div>
+                <div class="shape semicircle"></div>
+                <div class="shape rectangle-yellow"></div>
+            </div>
+        </div>
+        <div class="signup-form">
+            <h1>Create Account</h1>
+            <p class="subtitle">Please fill in your information to get started</p>
+            <form id="signupForm">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label class="input-label" for="firstName">First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div class="input-group full-width">
+                        <label class="input-label" for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="input-group full-width">
+                        <label class="input-label" for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" required>
+                    </div>
+                    <div class="input-group full-width">
+                        <label class="input-label" for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                </div>
+                <div id="errorMessage" class="error-message"></div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="login-link">
+                Already have an account? <a href="loginpage.html">Log in</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Basic form validation
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMessageEl = document.getElementById('errorMessage');
+
+            // Reset previous error messages
+            errorMessageEl.textContent = '';
+
+            // Validation checks
+            if (firstName.length < 2) {
+                errorMessageEl.textContent = 'First name must be at least 2 characters long.';
+                return;
+            }
+
+            if (lastName.length < 2) {
+                errorMessageEl.textContent = 'Last name must be at least 2 characters long.';
+                return;
+            }
+
+            if (!email.includes('@')) {
+                errorMessageEl.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            if (mobile.length < 10) {
+                errorMessageEl.textContent = 'Please enter a valid mobile number.';
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMessageEl.textContent = 'Password must be at least 6 characters long.';
+                return;
+            }
+
+            // If all validations pass, redirect to landing page
+            localStorage.setItem('userSignedUp', 'true');
+            window.location.href = 'landing.html';
+        });
+    </script>
+</body>
+</html>

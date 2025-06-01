@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosti Deals</title>
+    <style>
+        :root {
+            --primary: #ea580c;
+            --secondary: #fed7aa;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #eab308;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            --radius: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            min-height: 100vh;
+        }
+
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        /* Updated Sign In button styling */
+        .nav-signin {
+            background: #6C63FF;
+            color: white;
+            border: none;
+        }
+
+        .nav-signin:hover {
+            background: #d15209;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Updated Login button styling */
+        .nav-login {
+            background: black;
+            color: white;
+            
+        }
+
+        .nav-login:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav-seller {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-seller:hover {
+            background: #c2410c;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 5rem;
+        }
+
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-section h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .category-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+            color: var(--dark);
+        }
+
+        .category-btn:hover {
+            background: var(--secondary);
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            width: auto;
+            max-width: 250px;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .friend-badge {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius);
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 1.125rem;
+            color: var(--primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .original-price {
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .product-rating {
+            color: var(--accent);
+            letter-spacing: 1px;
+            font-size: 0.875rem;
+        }
+
+        .product-sales {
+            color: #64748b;
+            font-size: 0.75rem;
+        }
+
+        /* Added Buy Now button styling */
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .buy-button:hover {
+            background: #c2410c;
+        }
+
+        .buy-button:active {
+            transform: scale(0.98);
+        }
+
+        .buy-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .buy-button:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 200px 1fr;
+                gap: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                position: static;
+                margin-bottom: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Dosti Deals</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for friendly deals...">
+            </div>
+            <div class="cart-icon">🛒</div>
+            <div class="nav-buttons">
+                <a href="signuppage.html" class="nav-signin">Sign Up</a>
+                <a href="loginpage.html" class="nav-login">Log In</a>
+                <a href="seller.html" class="nav-seller">Seller</a>
+               
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="filters">
+            <h2>Filters</h2>
+            <div class="filter-section">
+                <h3>Categories</h3>
+                <button class="category-btn active">All Deals</button>
+                <button class="category-btn">Electronics</button>
+                <button class="category-btn">Fashion</button>
+                <button class="category-btn">Home & Living</button>
+                <button class="category-btn">Beauty</button>
+                <button class="category-btn">Sports</button>
+            </div>
+            <div class="filter-section">
+                <h3>Price Range</h3>
+                <input type="range" min="0" max="6000" value="6000" style="width: 100%">
+                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                    <span>Rs.0</span>
+                    <span>Rs.6000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Cotton Matress",
+                price: 3000,
+                originalPrice: 4000,
+                rating: 4,
+                sales: 1000,
+                stockQuantity: 10,
+                image: "images project/81cdL31JCBL.jpg",
+                link: "Cotton_Matress.html"
+            },
+            {
+                id: 2,
+                name: "Bed Study table",
+                price: 800,
+                originalPrice: 850,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/WhatsApp Image 2025-03-26 at 16.38.52 (2).jpeg",
+                link: "Study_table.html"
+            },
+            {
+                id: 3,
+                name: "Bucket",
+                price: 79,
+                originalPrice: 129,
+                rating: 5,
+                sales: 95,
+                stockQuantity: 10,
+                image: "images project/WhatsApp Image 2025-03-26 at 15.35.50.jpeg",
+                link: "Bucket.html"
+            },
+            {
+                id: 4,
+                name: "Calculator",
+                price: 700,
+                originalPrice: 1000,
+                rating: 4,
+                sales: 300,
+                stockQuantity: 10,
+                image: "images project/61IujYL0JTL.jpg",
+                link: "Calculator.html"
+            },
+            {
+                id: 5,
+                name: "Cycle black",
+                price: 1500,
+                originalPrice: 2000,
+                rating: 4,
+                sales: 200,
+                stockQuantity: 10,
+                image: "images project/500bedb6a2e2c5c451675ab63982374c.jpg",
+                link: "Cycle.html"
+            },
+            {
+                id: 6,
+                name: "Guitar",
+                price: 8000,
+                originalPrice: 9000,
+                rating: 4,
+                sales: 1000,
+                stockQuantity: 10,
+                image: "images project/5db8ca59f629c4fa8aa91330aed27016.jpg",
+                link: "Guitar.html"
+            },
+            {
+                id: 7,
+                name: "Bag",
+                price: 300,
+                originalPrice: 450,
+                rating: 4,
+                sales: 150,
+                stockQuantity: 10,
+                image: "images project/7fe493d73f26873665190ee93c00cfdf.jpg",
+                link: "Bag.html"
+            },
+            {
+                id: 8,
+                name: "Phone Stand ",
+                price: 100,
+                originalPrice: 250,
+                rating: 4,
+                sales: 150,
+                stockQuantity: 10,
+                image: "images project/63c5fedb59313e05325e6d31-nulaxy-dual-folding-cell-phone-stand.jpg",
+                link: "Phone_Stand.html"
+            },
+            {
+                id: 9,
+                name: "Laptop Stand",
+                price: 300,
+                originalPrice: 400,
+                rating: 4,
+                sales: 100,
+                stockQuantity: 10,
+                image: "images project/71xlXzGX9aL.jpg",
+                link: "Laptop_Stand.html"
+            },
+            {
+                id: 10,
+                name: "Kettle",
+                price: 650,
+                originalPrice: 700,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/415mgfOmzUS_600x.jpg",
+                link: "Kettle.html"
+            },
+            {
+                id: 7,
+                name: "Storage Bag",
+                price: 200,
+                originalPrice: 299,
+                rating: 4,
+                sales: 99,
+                stockQuantity: 10,
+                image: "images project/0726f3ab5c1ff35abb353319850bfa1c.jpg",
+                link: "Storage_Bag.html"
+            },
+            {
+                id: 11,
+                name: "Boat Earbuds",
+                price: 1899,
+                originalPrice: 1900,
+                rating: 4,
+                sales: 1,
+                stockQuantity: 10,
+                image: "images project/848dc289b2c7973658c80b0c49e582f4.jpg",
+                link: "earbuds.html"
+            },
+            {
+                id: 12,
+                name: "Laundry Bag",
+                price: 150,
+                originalPrice: 200,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/15286880a.webp",
+                link: "Laundry_Bag.html"
+            },
+            {
+                id: 13,
+                name: "Dell Inspiron 15 3511",
+                price: 47990,
+                originalPrice: 50000,
+                rating: 4,
+                sales: 2010,
+                stockQuantity: 10,
+                image: "images project/na-laptop-dell-original-imag57f9vrbqz8ef.webp",
+                link: "object.html"
+            },
+            {
+                id: 14,
+                name: "Badminton rackets",
+                price: 900,
+                originalPrice: 1500,
+                rating: 4,
+                sales: 150,
+                stockQuantity: 10,
+                image: "images project/0624158680405a938656e2c599b2e0ec.jpg",
+                link: "Badminton_rackets.html"
+            },
+            {
+                id: 15,
+                name: "Yoga Mat",
+                price: 1500,
+                originalPrice: 2000,
+                rating: 4,
+                sales: 500,
+                stockQuantity: 10,
+                image: "images project/a0fee709-2209-4d74-81e8-c55ebfcbce47.jpg",
+                link: "Yoga_Mat.html"
+            },
+            {
+                id: 16,
+                name: "Samsung S23",
+                price: 50000,
+                originalPrice: 50000,
+                rating: 4,
+                sales: 0,
+                stockQuantity: 10,
+                image: "images project/a57135685b5de74c500086d012e4181b.jpg",
+                link: "SamsungS23.html"
+            },
+            {
+                id: 17,
+                name: "Power Bank",
+                price: 950,
+                originalPrice: 1000,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/ac6fddcb782d5a3cf9f5c94621c80228.jpg",
+                link: "Power_Bank.html"
+            },
+            {
+                id: 18,
+                name: "Table tennis kit",
+                price: 450,
+                originalPrice: 500,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/b2fe21671317a9cf1fdcd68efff80ee4.jpg",
+                link: "Table_tennis_kit.html"
+            },
+            {
+                id: 18,
+                name: "Notebook",
+                price: 100,
+                originalPrice: 150,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/classmate-a4-size-notebook.jpg",
+                link: "Notebook.html"
+            },
+            {
+                id: 19,
+                name: "Fairy Lights",
+                price: 250,
+                originalPrice: 350,
+                rating: 4,
+                sales: 100,
+                stockQuantity: 10,
+                image: "images project/d29eb2d2307cb363d350b3ad206dc3be.jpg",
+                link: "Fairy_Lights.html"
+            },
+            {
+                id: 20,
+                name: "Study lamp",
+                price: 200,
+                originalPrice: 299,
+                rating: 4,
+                sales: 99,
+                stockQuantity: 10,
+                image: "images project/f589c027e1ed9dd9ad47d4493b2bee77.jpg",
+                link: "Study_lamp.html"
+            },
+            {
+                id: 21,
+                name: "Smart watch",
+                price: 1000,
+                originalPrice: 1999,
+                rating: 4,
+                sales: 999,
+                stockQuantity: 10,
+                image: "images project/fa0c73d0dfca055daf5af01ca7b3f578.jpg",
+                link: "Smart_watch.html"
+            },
+            {
+                id: 22,
+                name: "Bajaj iron",
+                price: 1200,
+                originalPrice: 1300,
+                rating: 4,
+                sales: 100,
+                stockQuantity: 10,
+                image: "images project/HerculodryIron.webp",
+                link: "Bajaj_iron.html"
+            },
+            {
+                id: 23,
+                name: "Mattress",
+                price: 4500,
+                originalPrice: 5000,
+                rating: 4,
+                sales: 500,
+                stockQuantity: 10,
+                image: "images project/hostel-bed-mattress.jpg",
+                link: "Mattress.html"
+            },
+            {
+                id: 24,
+                name: "Dustbin",
+                price: 250,
+                originalPrice: 300,
+                rating: 4,
+                sales: 50,
+                stockQuantity: 10,
+                image: "images project/kuber-industries-plastic-pedal-dustbinwastebin-with-handle-10-liter-green-47km0911-4599160384815025_l.jpg",
+                link: "Dustbin.html"
+            },
+
+        ];
+
+        function getStarRating(rating) {
+            return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        }
+
+        function renderProducts(searchQuery = '') {
+            const productsGrid = document.getElementById('productsGrid');
+
+            // Filter products based on search query
+            const filteredProducts = products.filter(product => {
+                // If no search query, show all products
+                if (!searchQuery) return true;
+
+                // Case-insensitive search in product name
+                return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+            });
+
+            // Show message if no products match search
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = `<div style="grid-column: span 3; text-align: center; padding: 2rem;">
+            <h3>No products found matching "${searchQuery}"</h3>
+            <p>Try a different search term or browse categories instead.</p>
+        </div>`;
+                return;
+            }
+
+            // Render the filtered products
+            productsGrid.innerHTML = filteredProducts.map(product => `
+        <div class="product-card">
+            <a href="${product.link}" style="text-decoration: none; color: inherit;">
+                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <div class="product-info">
+                    <span class="friend-badge">Friend's Price</span>
+                    <h3 class="product-name">${product.name}</h3>
+                    <div class="product-price">
+                        Rs.${product.price} <span class="original-price">Rs.${product.originalPrice}</span>
+                    </div>
+                    <p>Stock: ${product.stockQuantity}</p>
+                </div>
+                <div class="product-footer">
+                    <div class="product-rating">${getStarRating(product.rating)}</div>
+                    <div class="product-sales">Sold ${product.sales}</div>
+                </div>
+            </a>
+            <button class="buy-button" data-product-id="${product.id}">Buy Now</button>
+        </div>
+    `).join('');
+        }
+
+        // Update the DOMContentLoaded event to include search functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render of all products
+            renderProducts();
+
+            // Set up search functionality
+            const searchInput = document.querySelector('.search-bar input');
+
+            // Add event listener for input changes (as user types)
+            searchInput.addEventListener('input', (e) => {
+                renderProducts(e.target.value);
+            });
+
+            // Add event listener for search submission (when user presses Enter)
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    renderProducts(e.target.value);
+                }
+            });
+
+            // Set up category filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Clear search input when category is changed
+                    searchInput.value = '';
+
+                    // Update active class
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Filter products by category (if not "All Deals")
+                    const category = button.textContent;
+                    if (category === 'All Deals') {
+                        renderProducts();
+                    } else {
+                        // This is a simple category filter that you can refine further
+                        // by adding a "category" field to your product objects
+                        const filteredProducts = products.filter(product => {
+                            if (category === 'Electronics') {
+                                return ['Calculator', 'Smart watch', 'Boat Earbuds', 'Dell Inspiron 15 3511', 'Samsung S23', 'Power Bank'].includes(product.name);
+                            } else if (category === 'Fashion') {
+                                return ['Bag', 'Storage Bag'].includes(product.name);
+                            } else if (category === 'Home & Living') {
+                                return ['Cotton Matress', 'Mattress', 'Bucket', 'Bed Study table', 'Dustbin', 'Study lamp', 'Fairy Lights', 'Kettle', 'Laundry Bag', 'Bajaj iron'].includes(product.name);
+                            } else if (category === 'Beauty') {
+                                // Add beauty products here
+                                return false;
+                            } else if (category === 'Sports') {
+                                return ['Cycle black', 'Badminton rackets', 'Table tennis kit', 'Yoga Mat'].includes(product.name);
+                            }
+                            return false;
+                        });
+
+                        productsGrid.innerHTML = filteredProducts.map(product => `
+                    <div class="product-card">
+                        <a href="${product.link}" style="text-decoration: none; color: inherit;">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            <div class="product-info">
+                                <span class="friend-badge">Friend's Price</span>
+                                <h3 class="product-name">${product.name}</h3>
+                                <div class="product-price">
+                                    Rs.${product.price} <span class="original-price">Rs.${product.originalPrice}</span>
+                                </div>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-rating">${getStarRating(product.rating)}</div>
+                                <div class="product-sales">Sold ${product.sales}</div>
+                            </div>
+                        </a>
+                        <button class="buy-button" data-product-id="${product.id}">Buy Now</button>
+                    </div>
+                `).join('');
+
+                        // Show message if no products in category
+                        if (filteredProducts.length === 0) {
+                            productsGrid.innerHTML = `<div style="grid-column: span 3; text-align: center; padding: 2rem;">
+                        <h3>No products found in ${category}</h3>
+                    </div>`;
+                        }
+                    }
+                });
+            });
+
+            // Set up price range filter
+            const priceRange = document.querySelector('input[type="range"]');
+            priceRange.addEventListener('input', () => {
+                const maxPrice = parseInt(priceRange.value);
+                const filteredProducts = products.filter(product => product.price <= maxPrice);
+
+                // Show message if no products match price range
+                if (filteredProducts.length === 0) {
+                    productsGrid.innerHTML = `<div style="grid-column: span 3; text-align: center; padding: 2rem;">
+                <h3>No products found under Rs.${maxPrice}</h3>
+            </div>`;
+                    return;
+                }
+
+                productsGrid.innerHTML = filteredProducts.map(product => `
+            <div class="product-card">
+                <a href="${product.link}" style="text-decoration: none; color: inherit;">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <span class="friend-badge">Friend's Price</span>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">
+                            Rs.${product.price} <span class="original-price">Rs.${product.originalPrice}</span>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-rating">${getStarRating(product.rating)}</div>
+                        <div class="product-sales">Sold ${product.sales}</div>
+                    </div>
+                </a>
+                <button class="buy-button" data-product-id="${product.id}">Buy Now</button>
+            </div>
+        `).join('');
+            });
+
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('buy-button')) {
+                    const productId = e.target.dataset.productId;
+                    const product = products.find((product) => product.id == productId);
+                    if (product.stockQuantity > 0) {
+                        product.stockQuantity -= 1;
+                        product.sales += 1;
+                        renderProducts();
+                    } else {
+                        alert('Product is out of stock!');
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

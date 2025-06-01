@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Main background gradient */
+  .diagonal-bg {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffecda 0%, #ffecda 100%);
+  }
+  
+  /* Left corner accent */
+  .diagonal-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, rgba(234, 88, 12, 0.15) 30%, transparent 30%);
+    z-index: -1;
+  }
+  
+  /* Right corner accent */
+  .diagonal-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top left, rgba(234, 88, 12, 0.1) 30%, transparent 30%);
+    z-index: -1;
+  }
+  
+  /* Card styling */
+  .thank-you-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    text-align: center;
+    width: 500px;
+    border: 1px solid rgba(234, 88, 12, 0.1);
+  }
+  
+  /* Icon container */
+  .success-icon {
+    background-color: #22c55e;
+    color: white;
+    border-radius: 9999px;
+    padding: 0.75rem;
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.2);
+  }
+  
+  /* Heading */
+  .thank-you-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #1e293b;
+  }
+  
+  /* Message */
+  .thank-you-message {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body class="flex items-center justify-center min-h-screen diagonal-bg">
+<div class="thank-you-card">
+  <div class="flex justify-center">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+  </div>
+  <h1 class="thank-you-heading">Thank you!</h1>
+  <p class="thank-you-message">Your order will be dispatched soon.<br>Be patient and have a good day.</p>
+</div>
+</body>
+</html>

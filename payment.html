@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <form action="thankyou.html" method="get" class="bg-white shadow-md rounded-lg p-6 w-96">
+        <h2 class="text-xl font-bold mb-4">Payment</h2>
+        <p class="text-sm text-gray-600 mb-4">All transactions are secure and encrypted.</p>
+        
+        <div class="mb-4">
+            <div class="flex items-center mb-2">
+                <input
+                     type="radio"
+                     id="online-payment"
+                     name="payment-method"
+                     class="mr-2"
+                     checked
+                >
+                <label for="online-payment" class="flex items-center">
+                    Cards, Netbanking, wallets, UPI, Paypal
+                </label>
+            </div>
+            <div class="flex space-x-2 mb-3 pl-6">
+                <img src="images project/294654_visa_icon.png" alt="Visa" class="h-5">
+                <img src="images project/mastercard.svg" alt="Mastercard" class="h-5">
+                <img src="images project/PayPal Logo _ 03 - PNG Logo Vector Brand Downloads (SVG, EPS).jpeg" alt="PayPal" class="h-5">
+                <img src="pt.png" alt="Paytm" class="h-5">
+            </div>
+            <div class="bg-gray-100 rounded p-3 flex items-center text-sm text-gray-700 mb-4">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+                After clicking "Complete order", you will be redirected to Cashfree to complete your purchase securely.
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <div class="flex items-center mb-2">
+                <input
+                     type="radio"
+                     id="cod"
+                     name="payment-method"
+                     class="mr-2"
+                >
+                <label for="cod">Cash on Delivery (COD)</label>
+            </div>
+        </div>
+        
+        <h3 class="text-lg font-semibold mb-3">Billing address</h3>
+        <p class="text-sm text-gray-600 mb-4">Select the address that matches your card or payment method.</p>
+        
+        <div class="space-y-2 mb-4">
+            <div>
+                <input
+                     type="radio"
+                     id="same-address"
+                     name="billing-address"
+                     class="mr-2"
+                     checked
+                >
+                <label for="same-address">Same as shipping address</label>
+            </div>
+            <div>
+                <input
+                     type="radio"
+                     id="different-address"
+                     name="billing-address"
+                     class="mr-2"
+                >
+                <label for="different-address">Use a different billing address</label>
+            </div>
+        </div>
+        <a href="thankyou.html" class="inline-block bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors">
+            complete order
+        </a>
+    </form>
+</body>
+</html>
